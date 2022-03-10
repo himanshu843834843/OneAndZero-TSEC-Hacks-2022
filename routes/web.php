@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,3 +22,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('users',UsersController::class);
+Route::post('users/getUsersJson',[UsersController::class, 'getUsersJson'])->name('users.getUsersJson');
+Route::post('masters/users/{user}/make-admin', [UsersController::class, 'makeAdmin'])->name('users.make-admin');
+Route::post('masters/users/{user}/revoke-admin', [UsersController::class, 'revokeAdmin'])->name('users.revoke-admin');
